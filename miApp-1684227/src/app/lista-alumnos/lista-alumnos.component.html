@@ -1,26 +1,28 @@
-<ion-list>
-  <ion-item-sliding *ngFor="let alumno of alumnos">
-    <ion-item-options side="start">
-      <ion-item-option color="success">
-        <ion-icon slot="bottom" name="archive"></ion-icon>
-        Archivar
-      </ion-item-option>
-    </ion-item-options>
-    
-    <ion-item>
-    <ion-label>{{alumno}}</ion-label>
-    </ion-item>
-  
-    <ion-item-options>
-      <ion-item-option color="warning">
-        <ion-icon slot="bottom" name="star"></ion-icon>
-        Favorito
-      </ion-item-option>
-      <ion-item-option color="danger">
-        <ion-icon slot="bottom" name="trash"></ion-icon>
-        Borrar 
-      </ion-item-option>
-    </ion-item-options>
+<form #templateForm="ngForm" (ngSubmit)="agregarAlumno()">
+  <ion-label>Nombre alumno:</ion-label>
+  <ion-input required [{ngModel}]="alumno.nombre" placeholder="Ejemplo: Francisco" name="nombre"></ion-input>
+  <ion-label>
+  <ion-checkbox [{ngModel}]="alumno.presente" name="presente"></ion-checkbox>
+  </ion-label>
+  <div>
+    <ion-button type="submit">Agregar</ion-button>
+  </div>
+</form>
 
-</ion-item-sliding>
-</ion-list>
+  <ion-list>
+    <ion-item-sliding *ngFor="let alumno of alumnos">
+      <ion-item-options side="start">
+        <ion-item-option color="success">Favorito</ion-item-option>
+      </ion-item-options>
+
+      <ion-item>
+        <ion-label>{{alumno}}</ion-label>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option color="danger" id="{{alumno}}-eliminar">Eliminar</ion-item-option>
+      </ion-item-options>
+      
+      <ion-action-sheet trigger="{{alumno}}-eliminar" header="Eliminar a {{alumno}}?" [buttons]="actionSheetButtons"></ion-action-sheet>
+    </ion-item-sliding>
+  </ion-list>
