@@ -11,4 +11,7 @@ export class ConsultaService {
   getProductos() {
     return this.http.get('https://fakestoreapi.com/products')
 }
+getProductosDetalle(idProducto: string){
+  return this.http.get('https://fakestoreapi.com/products/1' + idProducto);
+}
 }
